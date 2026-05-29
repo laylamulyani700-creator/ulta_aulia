@@ -138,7 +138,7 @@
             border-radius: 20px;
             box-shadow: var(--shadow);
             margin: 40px 0;
-            border: 2px dashed #93c5fd; /* Garis putus-putus biru muda */
+            border: 2px dashed #93c5fd;
             animation: fadeIn 1.5s ease-out;
         }
 
@@ -163,19 +163,18 @@
         }
 
         .gallery-item {
-            flex: 1 1 200px; /* Flex grow, shrink, basis */
+            flex: 1 1 200px;
             max-width: 300px;
         }
 
         .gallery img {
             width: 100%;
-            height: 300px; /* Memperpanjang tinggi agar foto portrait terlihat bagus */
+            height: 300px;
             object-fit: cover;
             border-radius: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 5px solid var(--white);
             box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-            cursor: pointer;
         }
 
         .gallery img:hover {
@@ -193,7 +192,6 @@
         .gift-box {
             width: 150px;
             height: 150px;
-            /* Kotak Kado Biru */
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             margin: 0 auto 30px;
             position: relative;
@@ -209,7 +207,7 @@
             z-index: 10;
         }
 
-        .gift-box::before { /* Tutup Kado Kuning */
+        .gift-box::before {
             content: '';
             position: absolute;
             top: 0;
@@ -220,7 +218,7 @@
             border-radius: 10px 10px 0 0;
         }
 
-        .gift-box::after { /* Pita Kuning */
+        .gift-box::after {
             content: '';
             position: absolute;
             width: 30px;
@@ -320,19 +318,21 @@
             </p>
         </section>
 
-        <!-- Photo Gallery (Foto Asli dari User) -->
+        <!-- Photo Gallery -->
         <section>
             <h2 style="font-family: 'Fredoka One'; color: var(--primary-color); margin-bottom: 20px;">Galeri Cantik Aulia</h2>
             <div class="gallery">
                 <!-- Foto 1 -->
                 <div class="gallery-item">
-                    <img src="https://z-cdn-media.chatglm.cn/files/16f94563-ec09-4fbb-a02d-bb10c9ee5453.png?auth_key=1880060287-f8e7f71822244e0ba2277f0ca35b3bf7-0-9adf39db86c9515bf6a96eb3d9cb954e" alt="Aulia Cantik 1">
+                    <img src="foto1.png" alt="Aulia Cantik 1">
                 </div>
                 <!-- Foto 2 -->
-    
+                <div class="gallery-item">
+                    <img src="foto2.png" alt="Aulia Cantik 2">
+                </div>
                 <!-- Foto 3 -->
                 <div class="gallery-item">
-                    <img src="https://z-cdn-media.chatglm.cn/files/1cf7425d-93ac-4597-b35b-b41bf0927bba.png?auth_key=1880060287-68dd9b2a4e124d9f858b7b25e597fcab-0-6b258a059b1d67f7e9b6a6296f0eecc4" alt="Aulia Cantik 3">
+                    <img src="foto3.png" alt="Aulia Cantik 3">
                 </div>
             </div>
         </section>
@@ -365,20 +365,18 @@
     </div>
 
     <script>
-        // 1. Generate Floating Balloons (Warna Langit & Matahari)
+        // 1. Generate Floating Balloons
         const balloonsContainer = document.getElementById('balloons');
-        // Palette: Biru Tua, Biru Muda, Cyan, Putih Awan, Kuning Matahari
         const colors = ['#3b82f6', '#60a5fa', '#93c5fd', '#ffffff', '#fcd34d'];
 
         function createBalloon() {
             const balloon = document.createElement('div');
             balloon.classList.add('balloon');
             
-            // Random properties
             const bg = colors[Math.floor(Math.random() * colors.length)];
             const left = Math.floor(Math.random() * 100);
-            const animDuration = Math.random() * 10 + 10; // 10-20s
-            const size = Math.random() * 30 + 30; // 30-60px
+            const animDuration = Math.random() * 10 + 10;
+            const size = Math.random() * 30 + 30;
 
             balloon.style.background = bg;
             balloon.style.left = left + '%';
@@ -389,17 +387,13 @@
 
             balloonsContainer.appendChild(balloon);
 
-            // Remove after animation ends to save memory
             setTimeout(() => {
                 balloon.remove();
             }, (animDuration + 5) * 1000);
         }
 
-        // Create balloons periodically
         setInterval(createBalloon, 2000);
-        // Create initial bunch
         for(let i=0; i<10; i++) createBalloon();
-
 
         // 2. Gift Interaction
         function openGift() {
@@ -407,17 +401,12 @@
             const message = document.getElementById('hiddenMessage');
             const instruction = document.querySelector('.instruction');
 
-            // Hide gift box
             giftBtn.style.display = 'none';
             instruction.style.display = 'none';
-
-            // Show message
             message.style.display = 'block';
 
-            // Trigger Confetti
             fireConfetti();
         }
-
 
         // 3. Simple Confetti Script
         const canvas = document.getElementById('confetti-canvas');
@@ -434,10 +423,9 @@
                     y: window.innerHeight / 2,
                     w: Math.random() * 10 + 5,
                     h: Math.random() * 10 + 5,
-                    // Confetti warna biru, putih, kuning
                     color: colors[Math.floor(Math.random() * colors.length)],
                     speedX: Math.random() * 10 - 5,
-                    speedY: Math.random() * 10 - 15, // Pop upwards
+                    speedY: Math.random() * 10 - 15,
                     gravity: 0.5,
                     rotation: Math.random() * 360,
                     rotationSpeed: Math.random() * 10 - 5
@@ -462,7 +450,6 @@
                 ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
                 ctx.restore();
 
-                // Remove off-screen particles
                 if (p.y > canvas.height) {
                     confettiParticles.splice(index, 1);
                 }
@@ -473,7 +460,6 @@
             }
         }
 
-        // Resize canvas on window resize
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
