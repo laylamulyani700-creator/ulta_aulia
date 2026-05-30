@@ -4,278 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selamat Ulang Tahun Aulia Saridevi!</title>
-    <!-- Mengambil Font dari Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Palette Warna Blue Sky */
-            --primary-color: #3b82f6;   /* Biru Langit Utama */
-            --secondary-color: #60a5fa; /* Biru Muda */
-            --accent-color: #f59e0b;    /* Kuning Matahari */
-            --bg-color: #eff6ff;        /* Latar Belakang Sangat Muda */
-            --text-color: #1e3a8a;      /* Biru Gelap untuk Teks */
-            --white: #ffffff;
-            --shadow: 0 10px 30px rgba(59, 130, 246, 0.25);
+            --primary-color: #3b82f6;
+            --secondary-color: #60a5fa;
+            --bg-color: #f0fdf4;
+            --text-color: #1e293b;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             font-family: 'Nunito', sans-serif;
-            /* Gradasi background seperti langit */
-            background: linear-gradient(180deg, #dbeafe 0%, #eff6ff 100%);
+            background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            line-height: 1.6;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
         }
 
-        /* --- Animations --- */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            80% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Background Decorations (Balloons) --- */
+        /* Background Animations */
         .balloons-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
             overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .balloon {
             position: absolute;
             bottom: -100px;
-            width: 50px;
-            height: 60px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: floatUp 15s linear infinite;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            animation: float up linear infinite;
+            opacity: 0.7;
         }
 
-        .balloon::before {
-            content: '';
+        .balloon::after {
+            content: "🎈";
             position: absolute;
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 40px;
-            background: rgba(0,0,0,0.2);
+            left: 35%;
+            font-size: 10px;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(20deg);
+                opacity: 0;
+            }
         }
 
-        /* --- Layout --- */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* --- Hero Section --- */
-        header {
-            padding: 60px 0 20px 0;
-            animation: fadeIn 1s ease-out;
-        }
-
-        h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 3rem;
-            /* Gradasi Teks */
-            background: -webkit-linear-gradient(#2563eb, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            color: #2563eb;
-            background: rgba(255,255,255,0.95);
-            display: inline-block;
-            padding: 10px 25px;
-            border-radius: 50px;
-            box-shadow: var(--shadow);
-            transform: rotate(-2deg);
-            border: 2px solid #bfdbfe;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        /* --- Apology Section --- */
-        .apology-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            margin: 40px 0;
-            border: 2px dashed #93c5fd;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .apology-card h2 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .apology-card p {
-            font-size: 1.1rem;
-            color: #475569;
-        }
-
-        /* --- Gallery Section --- */
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .gallery-item {
-            flex: 1 1 200px;
-            max-width: 300px;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 5px solid var(--white);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .gallery img:hover {
-            transform: scale(1.03) rotate(1deg);
-            z-index: 2;
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.5);
-        }
-
-        /* --- Gift Section --- */
-        .gift-section {
-            padding: 50px 0;
-            perspective: 1000px;
-        }
-
-        .gift-box {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            margin: 0 auto 30px;
-            position: relative;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3);
-            transition: transform 0.3s;
-            animation: float 3s infinite ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            z-index: 10;
-        }
-
-        .gift-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: var(--accent-color);
-            border-radius: 10px 10px 0 0;
-        }
-
-        .gift-box::after {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 100%;
-            background: var(--accent-color);
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .gift-box:hover {
-            transform: scale(1.1);
-        }
-
-        .instruction {
-            font-weight: bold;
-            color: var(--primary-color);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Hidden Message */
-        .hidden-message {
-            display: none;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            margin-top: 20px;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid #bfdbfe;
-        }
-
-        .hidden-message h3 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        /* --- Footer --- */
-        footer {
-            margin-top: 60px;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #64748b;
-        }
-
-        footer strong {
-            color: var(--primary-color);
-        }
-
-        /* --- Confetti Canvas --- */
         #confetti-canvas {
             position: fixed;
             top: 0;
@@ -283,31 +76,174 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 999;
+            z-index: 100;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .container { padding: 15px; }
-            .gallery img { height: 250px; }
+        /* Container & Layout */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-family: 'Pacifico', cursive;
+            color: #f59e0b;
+            font-size: 1.3rem;
+            margin-top: 10px;
+        }
+
+        /* Card Sections */
+        .apology-card, .gift-section, .gallery-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .apology-card h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #ef4444;
+            margin-bottom: 12px;
+        }
+
+        .apology-card p {
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .gallery-item {
+            flex: 1;
+            min-width: 140px;
+            max-width: 160px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #e2e8f0;
+            aspect-ratio: 1 / 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Gift Interaction */
+        .gift-box {
+            width: 120px;
+            height: 120px;
+            background: #ef4444;
+            margin: 20px auto;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+            position: relative;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .gift-box span {
+            font-size: 3.5rem;
+            user-select: none;
+        }
+
+        .instruction {
+            font-weight: bold;
+            color: #64748b;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .hidden-message {
+            display: none;
+            background: #dbeafe;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px dashed #3b82f6;
+            margin-top: 15px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden-message h3 {
+            font-family: 'Fredoka One', cursive;
+            color: #1e40af;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .hidden-message p {
+            line-height: 1.6;
+            color: #1e3a8a;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Animations -->
     <div class="balloons-container" id="balloons"></div>
     <canvas id="confetti-canvas"></canvas>
 
     <div class="container">
-        <!-- Hero Section -->
         <header>
             <h1>Selamat Ulang Tahun<br>Aulia Saridevi!</h1>
             <div class="subtitle">✨ Spesial Tanggal 25 ✨</div>
         </header>
 
-        <!-- Apology Section -->
         <section class="apology-card">
             <h2>Maaf Telat Ya... 🥺</h2>
             <p>
@@ -318,31 +254,26 @@
             </p>
         </section>
 
-        <!-- Photo Gallery -->
-        <section>
+        <section class="gallery-section">
             <h2 style="font-family: 'Fredoka One'; color: var(--primary-color); margin-bottom: 20px;">Galeri Cantik Aulia</h2>
             <div class="gallery">
-                <!-- Foto 1 -->
                 <div class="gallery-item">
-                    <img src="foto1.png" alt="Aulia Cantik 1">
+                    <img src="https://picsum.photos/200/200?random=1" alt="Aulia Cantik 1">
                 </div>
-                <!-- Foto 2 -->
                 <div class="gallery-item">
-                    <img src="foto2.png" alt="Aulia Cantik 2">
+                    <img src="https://picsum.photos/200/200?random=2" alt="Aulia Cantik 2">
                 </div>
-                <!-- Foto 3 -->
                 <div class="gallery-item">
-                    <img src="foto3.png" alt="Aulia Cantik 3">
+                    <img src="https://picsum.photos/200/200?random=3" alt="Aulia Cantik 3">
                 </div>
             </div>
         </section>
 
-        <!-- Interactive Gift Section -->
         <section class="gift-section">
             <h2 style="font-family: 'Fredoka One'; color: var(--primary-color); margin-bottom: 20px;">Ada Sesuatu Buat Kamu</h2>
             
             <div class="gift-box" id="giftBtn" onclick="openGift()">
-                <span style="font-size: 3rem; color: white; margin-top: 40px; z-index: 2;">🎁</span>
+                <span>🎁</span>
             </div>
             
             <p class="instruction">Ketuk kadonya untuk buka!</p>
@@ -375,25 +306,25 @@
             
             const bg = colors[Math.floor(Math.random() * colors.length)];
             const left = Math.floor(Math.random() * 100);
-            const animDuration = Math.random() * 10 + 10;
-            const size = Math.random() * 30 + 30;
+            const animDuration = Math.random() * 6 + 8; // Sedikit dipercepat jalannya
+            const size = Math.random() * 30 + 20;
 
             balloon.style.background = bg;
             balloon.style.left = left + '%';
             balloon.style.width = size + 'px';
             balloon.style.height = size * 1.2 + 'px';
             balloon.style.animationDuration = animDuration + 's';
-            balloon.style.animationDelay = Math.random() * 5 + 's';
 
             balloonsContainer.appendChild(balloon);
 
             setTimeout(() => {
                 balloon.remove();
-            }, (animDuration + 5) * 1000);
+            }, animDuration * 1000);
         }
 
-        setInterval(createBalloon, 2000);
-        for(let i=0; i<10; i++) createBalloon();
+        // Loop balon berjalan otomatis
+        setInterval(createBalloon, 1500);
+        for(let i=0; i<8; i++) createBalloon();
 
         // 2. Gift Interaction
         function openGift() {
@@ -424,9 +355,9 @@
                     w: Math.random() * 10 + 5,
                     h: Math.random() * 10 + 5,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    speedX: Math.random() * 10 - 5,
-                    speedY: Math.random() * 10 - 15,
-                    gravity: 0.5,
+                    speedX: Math.random() * 12 - 6,
+                    speedY: Math.random() * -15 - 5,
+                    gravity: 0.4,
                     rotation: Math.random() * 360,
                     rotationSpeed: Math.random() * 10 - 5
                 });
